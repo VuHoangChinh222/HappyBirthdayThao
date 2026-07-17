@@ -1,74 +1,246 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="vi">
 <head>
-    <title>Happy Birthday</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Happy Birthday Thanh Thảo 🌸</title>
+    <!-- Importing custom styles -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="loader">
-                <button id="play">Nhấn đê</button>
+    <!-- Sakura Falling Background & Cursor Trails -->
+    <canvas id="sakuraBg"></canvas>
+
+    <!-- Celebration Canvas -->
+    <canvas id="confetti"></canvas>
+
+    <!-- Background Music -->
+    <audio class="song" id="bgMusic" loop>
+        <source src="music.mp3" type="audio/mpeg">
+        Trình duyệt của bạn không hỗ trợ file âm thanh này.
+    </audio>
+
+    <!-- 1. CINEMATIC COVER / LOADER PAGE -->
+    <div class="loader" id="loader">
+        <div class="intro-card reveal-3d">
+            <div class="gift-box-wrapper" id="giftBox">
+                <div class="gift-glow"></div>
+                <!-- Premium Heart Envelope SVG (Pink Theme) -->
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="25" width="80" height="55" rx="8" fill="#FFF0F2" stroke="#FF7597" stroke-width="3"/>
+                    <path d="M10 30L50 58L90 30" stroke="#FF7597" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M50 48L13 77" stroke="#FF7597" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M50 48L87 77" stroke="#FF7597" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M50 52C50 52 46 45 40 45C33 45 30 50 30 58C30 68 50 82 50 82C50 82 70 68 70 58C70 50 67 45 60 45C54 45 50 52 50 52Z" fill="#E05375"/>
+                </svg>
+            </div>
+            <h1 class="tech-title">Gửi Thanh Thảo... ✨</h1>
+            <p class="tech-subtitle">Một món quà sinh nhật ngập tràn sự ngọt ngào được thiết kế dành riêng cho bạn. Hãy mở nó ra nhé!</p>
+            
+            <div class="intro-actions">
+                <button class="btn-open" id="playBtn">
+                    Mở Thư Ngay
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                </button>
             </div>
         </div>
     </div>
-    <audio class="song" controls loop>
-        <source src="music.mp3">
-        </source>
-        Your browser isn't invited for super fun audio time.
-    </audio>
-    <canvas id="confetti"></canvas>
-    <div class="main">
-        <!-- Ô vuông bên trái -->
-        <div class="text-box text-box-left">
-            <div class="box-icon">Hoàng Chính</div>
-            <div class="box-text" style="display:none;">Sang tuổi mới chúc m trưởng thành hơn 😏, 
-                sống lâu trăm tuổi, con cháu đầy nhà, mãi mãi hạnh phúc, lạc quan yêu đời hehe</div>
-        </div>
 
-        <!-- Ô vuông bên phải -->
-        <div class="text-box text-box-right">
-            <div class="box-icon">Diễm Quỳnh</div>
-            <div class="box-text" style="display:none;">Chúc pà chân cứng đá mềm, vững bước tiến về cuộc sống ước mơ và hoài bão của chính pà nhó 🥰.
-                 Hông chỉ mỗi sinh nhật mà mọi ngày tui chúc pà lun hạnh phúc và mãi tích cực như vậy nhen!!!</div>
-        </div>
 
-        <div class="container pt-5">
-            <div class="row">
 
-                <div class="col-12 col-xl-6 mx-auto">
-                    <img src="img/banner.png" alt="">
-                </div>
-
-                <div class="col-12  text-center">
-                    <div id="name" class="area">Thanh Thảo</div>
-                </div>
-
-                <div class="col-12 text-center">
-                    <div class="type-wrap">
-                        <div id="typed-strings" class="typing">
-                            <h2>Sinh nhật vui vẻ <i id="nae">Thảo chợ chuối</i></h2>
-                            <h2>Chúc một ngày tốt lành</h2>
-                        </div>
-                        <span id="typed" style="white-space:pre;"></span>
+    <!-- 3. MAIN BENTO BOARD -->
+    <div class="main" id="mainContent">
+        <div class="bento-grid">
+            
+            <!-- Hero Banner Card -->
+            <div class="bento-card bento-hero scroll-reveal" id="hero-section" data-delay="0.1s">
+                <div class="hero-text-content">
+                    <span class="hero-tag">🌸 Chúc mừng sinh nhật</span>
+                    <h1 class="hero-title">Happy Birthday <br><span class="gold-shine" id="mainName">Thanh Thảo</span></h1>
+                    <div class="hero-typewriter">
+                        <span id="typedText"></span><span class="cursor">|</span>
                     </div>
                 </div>
-
-                <div class="col-12 col-xl-3 cake">
-                    <img src="img/cake.gif" alt="">
+                <div class="hero-illustration" id="heroParallax">
+                    <img src="img/birthday_illustration.png" alt="Birthday Illustration">
                 </div>
             </div>
-        </div>
-        <img src="img/Balloon-Border.png" width="100%" class="balloon-border">
-    </div>
-</body>
-<script src="https://unpkg.com/magic-snowflakes/dist/snowflakes.min.js"></script>
-<script src="js/jquery.js"></script>
-<script src="js/typed.min.js"></script>
-<script src="js/script.js"></script>
 
+            <!-- Vinyl Music Player Card -->
+            <div class="bento-card bento-music scroll-reveal" id="music-section" data-delay="0.2s">
+                <span class="hero-tag" style="margin-bottom: 20px;">Melody 🎵</span>
+                <div class="vinyl-wrapper">
+                    <div class="vinyl-disc" id="vinylDisc">
+                        <div class="vinyl-label"></div>
+                    </div>
+                    <!-- Vinyl Tonearm SVG -->
+                    <svg class="vinyl-tonearm" id="tonearm" viewBox="0 0 50 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M40 10 L25 15 L25 70 L20 75" stroke="#888" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="40" cy="10" r="8" fill="#555"/>
+                        <rect x="15" y="70" width="10" height="15" rx="2" fill="#333" transform="rotate(10 20 70)"/>
+                    </svg>
+                </div>
+                <div class="track-info">
+                    <div class="track-title" id="trackTitle">Happy Birthday Song</div>
+                    <div class="track-artist">Special Version</div>
+                </div>
+                <div class="player-controls">
+                    <button class="btn-player" id="btnMute" title="Tắt tiếng">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                    </button>
+                    <button class="btn-player btn-player-main" id="btnPlayPause" title="Phát / Dừng">
+                        <svg id="playIcon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
+                    </button>
+                </div>
+                <!-- EQ Visualizer -->
+                <div class="eq-container">
+                    <div class="eq-bar"></div>
+                    <div class="eq-bar"></div>
+                    <div class="eq-bar"></div>
+                    <div class="eq-bar"></div>
+                    <div class="eq-bar"></div>
+                </div>
+            </div>
+
+            <!-- Wishes Card -->
+            <div class="bento-card bento-wishes scroll-reveal" data-delay="0.3s">
+                <div class="card-header-title">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary-pink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    Lời chúc ngọt ngào
+                </div>
+                <div class="wishes-list" id="staggeredWishes">
+                    <!-- Wish item 1: Hoàng Chính -->
+                    <div class="wish-item item-stagger" data-sender="Hoàng Chính">
+                        <div class="avatar-initial">HC</div>
+                        <div class="wish-brief">
+                            <div class="wish-sender">Hoàng Chính</div>
+                            <div class="wish-snippet">Sang tuổi mới chúc m trưởng thành hơn...</div>
+                        </div>
+                        <div class="seal-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                        </div>
+                    </div>
+
+                    <!-- Wish item 2: Diễm Quỳnh -->
+                    <div class="wish-item item-stagger" data-sender="Diễm Quỳnh">
+                        <div class="avatar-initial">DQ</div>
+                        <div class="wish-brief">
+                            <div class="wish-sender">Diễm Quỳnh</div>
+                            <div class="wish-snippet">Chúc pà chân cứng đá mềm vững bước...</div>
+                        </div>
+                        <div class="seal-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Birthday Cake Card -->
+            <div class="bento-card bento-cake scroll-reveal" id="cake-section" data-delay="0.1s">
+                <div class="card-header-title" style="margin-bottom: 5px;">
+                    Thổi nến ước nguyện 🎂
+                </div>
+                <div class="cake-container">
+                    <div class="cake-graphic">
+                        <div class="cream-drips"></div>
+                        <div class="candles-row">
+                            <div class="candle" id="candle1"><div class="candle-wick"></div><div class="flame"></div></div>
+                            <div class="candle" id="candle2"><div class="candle-wick"></div><div class="flame"></div></div>
+                            <div class="candle" id="candle3"><div class="candle-wick"></div><div class="flame"></div></div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-wish" id="btnMakeWish">
+                    Thổi tắt nến ✨
+                </button>
+            </div>
+
+            <!-- Polaroid Stack Photo Gallery -->
+            <div class="bento-card bento-gallery scroll-reveal" data-delay="0.2s">
+                <div class="card-header-title" style="margin-bottom: 0;">
+                    Kỷ niệm đáng nhớ 📸
+                </div>
+                <div class="polaroid-deck" id="polaroidDeck">
+                    <!-- Photo 3 -->
+                    <div class="polaroid-photo" style="transform: rotate(6deg) translate(5px, 10px);">
+                        <img src="img/birthday_illustration.png" alt="Memory 3" style="filter: hue-rotate(15deg);">
+                        <div class="polaroid-caption">Tuổi mới rạng rỡ</div>
+                    </div>
+                    <!-- Photo 2 -->
+                    <div class="polaroid-photo" style="transform: rotate(-4deg) translate(-5px, 5px);">
+                        <img src="img/birthday_illustration.png" alt="Memory 2" style="filter: hue-rotate(300deg);">
+                        <div class="polaroid-caption">Luôn mỉm cười nhé</div>
+                    </div>
+                    <!-- Photo 1 (Top) -->
+                    <div class="polaroid-photo" style="transform: rotate(-1deg) translate(0px, 0px);">
+                        <img src="img/birthday_illustration.png" alt="Memory 1">
+                        <div class="polaroid-caption">Thanh Thảo 🌸</div>
+                    </div>
+                </div>
+                <span class="gallery-tip">Nhấp vào ảnh để xem hình tiếp theo</span>
+            </div>
+
+            <!-- Wish Jar Card -->
+            <div class="bento-card bento-jar scroll-reveal" id="jar-section" data-delay="0.3s">
+                <div class="card-header-title" style="margin-bottom: 5px;">
+                    Lọ ước nguyện ngọt ngào 🍯
+                </div>
+                <div class="jar-content">
+                    <div class="jar-svg" id="jarSvg">
+                        <!-- Glass Jar SVG (Pink Theme) -->
+                        <svg viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Lid -->
+                            <rect x="35" y="10" width="30" height="10" rx="3" fill="#E88398" stroke="#4A2E35" stroke-width="2"/>
+                            <!-- Neck -->
+                            <rect x="30" y="20" width="40" height="8" fill="#FFF" stroke="#4A2E35" stroke-width="2"/>
+                            <line x1="30" y1="28" x2="70" y2="28" stroke="#4A2E35" stroke-width="2"/>
+                            <!-- Jar Body -->
+                            <path d="M30 28 C15 35 15 105 30 110 C35 112 65 112 70 110 C85 105 85 35 70 28 Z" fill="rgba(255, 255, 255, 0.4)" stroke="#4A2E35" stroke-width="3"/>
+                            <!-- Glow highlight -->
+                            <path d="M35 34 C25 45 25 90 35 102" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                            <!-- Folded wishes container -->
+                            <g id="foldedWishes"></g>
+                        </svg>
+                    </div>
+                    <!-- Wishes Board displaying saved notes -->
+                    <div class="jar-wishes-board" id="jarWishesBoard">
+                        <div class="empty-board-msg" id="emptyBoardMsg">Chưa có điều ước nào trong lọ. Hãy là người đầu tiên ước nhé! ✨</div>
+                    </div>
+                    <div class="jar-input-area" style="width: 320px;">
+                        <textarea class="wish-textarea" id="wishInput" placeholder="Viết ước mơ hay lời chúc của bạn tại đây..."></textarea>
+                        <button class="btn-send-wish" id="btnSendWish">
+                            Thả điều ước 💫
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 4. MODAL OVERLAYS -->
+    <div class="photo-zoom-backdrop" id="photoZoomBackdrop"></div>
+
+    <div class="modal-overlay" id="letterModal">
+        <div class="letter-paper scale-in">
+            <button class="btn-close-modal" id="btnCloseLetter" title="Đóng thư">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <div class="letter-content" id="letterText">
+                <!-- Content injected dynamically -->
+            </div>
+            <div class="letter-signature" id="letterSign">
+                <!-- Sender name -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. FLOATING TOAST -->
+    <div class="toast-msg" id="toastMsg"></div>
+
+    <!-- JS dependencies -->
+    <script src="js/jquery.js"></script>
+    <script src="js/script.js"></script>
+</body>
 </html>

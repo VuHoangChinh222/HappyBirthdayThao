@@ -1,280 +1,1343 @@
-/* customizable snowflake styling */
-.loader button {
-    width: 50%;
-    height: 100px;
-    position: fixed;
-    left: 50%;
-    top: 45%;
-    transform: translateY(-50%);
-    transform: translateX(-50%);
-    background: center no-repeat #fff;
-    z-index: 9999999999999999999999;
-    font-size: 2rem;
-    outline: none;
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,600;0,800;1,400&display=swap');
+
+:root {
+    --primary-pink: #FF7597;
+    --primary-pink-hover: #E05375;
+    --light-pink: #FFF0F2;
+    --accent-gold: #D4AF37;
+    --text-main: #4A2E35;
+    --text-muted: #8B6E75;
+    --bg-cream: #FCF6F5;
+    
+    --glass-bg: rgba(255, 255, 255, 0.75);
+    --glass-border: rgba(255, 255, 255, 0.6);
+    --glass-shadow: 0 15px 35px rgba(224, 83, 117, 0.08);
+    
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'Outfit', sans-serif;
+    --font-hand: 'Dancing Script', cursive;
+}
+
+* {
     box-sizing: border-box;
-    border: none;
-    border-radius: .3em;
-    text-transform: uppercase;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 3px 6px rgba(110, 80, 20, .4),
-        inset 0 -2px 5px 1px rgba(139, 66, 8, 1),
-        inset 0 -1px 1px 3px rgba(250, 227, 133, 1);
-    background-image: linear-gradient(160deg, #a54e07, #b47e11, #fef1a2, #bc881b, #a54e07);
-    border: 1px solid #a55d07;
-    color: rgb(120, 50, 5);
-    text-shadow: 0 2px 2px rgba(250, 227, 133, 1);
-    cursor: pointer;
-    transition: all .2s ease-in-out;
-    background-size: 100% 100%;
-    background-position: center;
+    margin: 0;
+    padding: 0;
 }
 
-.golden-btn:focus,
-.golden-btn:hover {
-    background-size: 150% 150%;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23),
-        inset 0 -2px 5px 1px #b17d10,
-        inset 0 -1px 1px 3px rgba(250, 227, 133, 1);
-    border: 1px solid rgba(165, 93, 7, .6);
-    color: rgba(120, 50, 5, .8);
-}
-
-.golden-btn:active {
-    box-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 3px 6px rgba(110, 80, 20, .4),
-        inset 0 -2px 5px 1px #b17d10,
-        inset 0 -1px 1px 3px rgba(250, 227, 133, 1);
-}
-
-.loader {
-    position: fixed;
-    left: 0px;
-    top: 0px;
-    width: 100%;
-    height: 100%;
-    z-index: 999;
-    background: url(img/back.png) center no-repeat #000;
-}
-
-.song {
-    display: none;
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-    background-color: #FFDAB9;
+    background-color: var(--bg-cream);
+    font-family: var(--font-body);
+    color: var(--text-main);
+    overflow-x: hidden;
+    min-height: 100vh;
+    transition: background-color 0.8s ease;
 }
 
-img {
-    width: 100%;
+/* Magical Dimming when candles are blown */
+body.candles-blown-dim {
+    background-color: #1a1012;
+    color: #FFE3E8;
+}
+body.candles-blown-dim .bento-card {
+    background: rgba(42, 26, 30, 0.85);
+    border-color: rgba(255, 117, 151, 0.15);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+body.candles-blown-dim .hero-title,
+body.candles-blown-dim .track-title,
+body.candles-blown-dim .card-header-title {
+    color: #FFF;
+}
+body.candles-blown-dim .bento-hero {
+    background: linear-gradient(135deg, rgba(30, 15, 20, 0.85) 0%, rgba(20, 10, 12, 0.9) 100%);
 }
 
-.balloon-border {
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--light-pink);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--primary-pink);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-pink-hover);
+}
+
+/* High-Performance Sakura Falling Background */
+#sakuraBg {
     position: fixed;
-    top: 100%;
-    opacity: 0.5;
-    z-index: 99999999;
-}
-
-.area {
-    text-align: center;
-    font-size: 70px;
-    color: #C4515C;
-    letter-spacing: -7px;
-    font-weight: 700;
-    text-transform: uppercase;
-    animation: spin 2s ease-out infinite;
-    text-shadow: 0px 0px 5px #fff, 0px 0px 7px #fff;
-}
-
-#nae {
-    text-transform: capitalize;
-}
-
-#confetti {
-    position: absolute;
-    left: 0;
     top: 0;
-    height: 100%;
-    width: 100%;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
 }
 
-@keyframes spin {
-    0% {
-        transform: rotateZ(0);
-    }
-
-    25% {
-        transform: rotateZ(10deg);
-    }
-
-    50% {
-        transform: rotateZ(0deg);
-    }
-
-    75% {
-        transform: rotateZ(-10deg);
-    }
+/* Advanced Scroll Reveal Engine */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(60px) scale(0.96);
+    transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+    will-change: transform, opacity;
 }
 
-.type-wrap {
-    font-size: 25px;
-    color: #C4515C;
-
+.scroll-reveal.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
 }
 
-.cake {
-    transform: translateY(-50%);
-    transform: translateX(-50%);
-    left: 50%;
-    position: absolute;
-    padding-top: 250px;
+.item-stagger {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-/* CSS cho các ô vuông text */
-.text-box {
+.scroll-reveal.show .item-stagger {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Loader / Cover Page */
+.loader {
     position: fixed;
-    width: 18%;
-    height: 55%;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #FFF0F2 0%, #FFF5F6 50%, #FFE3E8 100%);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.loader.fade-out {
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.intro-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(16px);
+    border-radius: 36px;
+    padding: 60px 48px;
+    text-align: center;
+    box-shadow: 0 25px 60px rgba(224, 83, 117, 0.15);
+    max-width: 500px;
+    width: 90%;
+    transform: translateY(0);
+    animation: cardPulse 5s ease-in-out infinite;
+}
+
+@keyframes cardPulse {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); box-shadow: 0 35px 70px rgba(224, 83, 117, 0.2); }
+}
+
+.gift-box-wrapper {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 30px;
+    cursor: pointer;
+}
+
+.gift-box-wrapper svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 10px 20px rgba(255, 117, 151, 0.3));
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.gift-box-wrapper:hover svg {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.gift-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(255, 117, 151, 0.25) 0%, rgba(255, 117, 151, 0) 70%);
+    border-radius: 50%;
+    z-index: -1;
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.5; }
+    50% { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
+}
+
+.intro-card h1 {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 15px;
+    letter-spacing: -0.5px;
+}
+
+.intro-card p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 35px;
+}
+
+/* Premium Springy Buttons */
+button, .btn-open, .btn-player, .btn-wish, .btn-send-wish {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.4), box-shadow 0.4s ease;
+}
+
+button:active, .btn-open:active, .btn-player:active, .btn-wish:active, .btn-send-wish:active {
+    transform: scale(0.92) !important;
+}
+
+.btn-open {
+    background: linear-gradient(135deg, var(--primary-pink) 0%, var(--primary-pink-hover) 100%);
+    border: none;
+    outline: none;
+    color: white;
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 16px 36px;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(255, 117, 151, 0.4);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-open::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 30%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-25deg);
+    transition: none;
+}
+
+.btn-open:hover::after {
+    animation: shineSweep 1.5s ease infinite;
+}
+
+.btn-open:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(255, 117, 151, 0.5);
+}
+
+/* Fancy Button Click Sparkles */
+.btn-ripple-particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary-pink);
+    pointer-events: none;
+    z-index: 10000;
+    animation: buttonParticleRise 0.6s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+}
+
+@keyframes buttonParticleRise {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    100% { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0.2); opacity: 0; }
+}
+
+/* Main Content Styles */
+.main {
+    position: relative;
+    z-index: 10;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 24px 80px 24px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.main.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Bento Grid Layout */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(180px, auto);
+    gap: 24px;
+    perspective: 1000px;
+}
+
+/* Advanced Bento Cards base (3D Tilt Ready) */
+.bento-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(20px);
+    border-radius: 28px;
+    padding: 32px;
+    box-shadow: var(--glass-shadow);
+    transition: box-shadow 0.4s ease, border-color 0.4s ease, background 0.8s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    /* 3D Transform values injected by JS */
+    transform: perspective(1000px) rotateX(var(--tilt-y, 0deg)) rotateY(var(--tilt-x, 0deg)) translateY(var(--elevate, 0));
+    transform-style: preserve-3d;
+}
+
+.bento-card:hover {
+    box-shadow: 0 30px 60px rgba(224, 83, 117, 0.15);
+    border-color: rgba(255, 117, 151, 0.5);
+    z-index: 10;
+    --elevate: -8px;
+}
+
+/* Dynamic Spotlight Glow */
+.bento-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(600px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(255, 117, 151, 0.15), transparent 40%);
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.bento-card:hover::before {
+    opacity: 1;
+}
+
+.bento-card * {
+    position: relative;
+    z-index: 2;
+    transform: translateZ(20px); /* Creates depth inside the card */
+}
+
+/* Hero card (Double width) */
+.bento-hero {
+    grid-column: span 2;
+    grid-row: span 2;
+    padding: 44px;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(255, 240, 242, 0.85) 0%, rgba(255, 227, 232, 0.7) 100%);
+}
+
+.hero-text-content {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-tag {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--primary-pink);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.hero-title {
+    font-family: var(--font-display);
+    font-size: 3.4rem;
+    font-weight: 800;
+    color: var(--text-main);
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.gold-shine {
+    background: linear-gradient(to right, #C4515C 20%, #FFD700 40%, #FFD700 60%, #C4515C 80%);
+    background-size: 200% auto;
+    color: #000;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: goldShine 4s linear infinite;
+    display: inline-block;
+}
+
+@keyframes goldShine {
+    to { background-position: 200% center; }
+}
+
+.hero-typewriter {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    min-height: 50px;
+    line-height: 1.6;
+}
+
+.cursor {
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink { 50% { opacity: 0; } }
+
+.hero-illustration {
+    flex: 0.8;
+    height: 100%;
+    min-height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(224, 83, 117, 0.15);
+    transition: transform 0.5s ease-out;
+}
+
+.hero-illustration img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Vinyl Player Card */
+.bento-music {
+    grid-column: span 1;
+    grid-row: span 2;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #FF6B9D, #FFC75F);
-    border-radius: 15px;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease-in-out;
-    z-index: 100;
-    top: 50%;
-    padding: 10px;
-}
-
-.text-box:hover {
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-}
-
-.text-box-left {
-    left: 10px;
-    transform: translateY(-50%);
-}
-
-.text-box-right {
-    right: 10px;
-    transform: translateY(-50%);
-}
-
-.box-icon {
-    font-size: 16px;
-    transition: all 0.3s ease-in-out;
-    color: #333;
-    font-weight: 600;
     text-align: center;
-    line-height: 1.4;
-    overflow: hidden;
+}
+
+.vinyl-wrapper {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    margin-bottom: 25px;
+    transform: translateZ(30px);
+}
+
+.vinyl-disc {
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, #222 30%, #111 60%, #000 70%);
+    border-radius: 50%;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    animation: spinVinyl 6s linear infinite;
+    animation-play-state: paused;
+    transition: transform 0.5s ease;
 }
 
-.text-box:hover .box-icon {
-    transform: scale(1.05);
-}
-
-.box-text {
+.vinyl-disc::before {
+    content: '';
     position: absolute;
-    background: linear-gradient(135deg, #FF6B9D, #FFC75F);
-    color: rgb(0, 0, 0);
-    padding: 15px 20px;
-    border-radius: 15px;
-    font-size: 20px;
-    font-weight: 500;
-    text-align: center;
-    white-space: normal;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    animation: fadeIn 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-    line-height: 1.6;
-    z-index: 101;
+    width: 90%;
+    height: 90%;
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 50%;
+}
+
+.vinyl-label {
+    width: 50px;
+    height: 50px;
+    background: var(--primary-pink);
+    border-radius: 50%;
+    display: flex;
     align-items: center;
+    justify-content: center;
+    border: 3px solid #000;
+}
+
+.vinyl-label::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--bg-cream);
+    border-radius: 50%;
+}
+
+.bento-music.playing .vinyl-disc {
+    animation-play-state: running;
+}
+
+.vinyl-tonearm {
+    position: absolute;
+    top: -5px;
+    right: 5px;
+    width: 50px;
+    height: 90px;
+    transform-origin: top right;
+    transform: rotate(-30deg);
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none;
+    z-index: 5;
+}
+
+.bento-music.playing .vinyl-tonearm {
+    transform: rotate(0deg);
+}
+
+@keyframes spinVinyl {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.track-info {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.track-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text-main);
+    margin-bottom: 4px;
+}
+
+.track-artist {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.btn-player {
+    background: white;
+    border: 1px solid var(--glass-border);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    color: var(--text-main);
+}
+
+.btn-player:hover {
+    transform: scale(1.15);
+    background: var(--light-pink);
+    color: var(--primary-pink);
+}
+
+.btn-player-main {
+    background: var(--primary-pink);
+    color: white;
+    width: 56px;
+    height: 56px;
+    box-shadow: 0 8px 20px rgba(255, 117, 151, 0.3);
+}
+
+.btn-player-main:hover {
+    background: var(--primary-pink-hover);
+    color: white;
+    box-shadow: 0 10px 25px rgba(255, 117, 151, 0.45);
+}
+
+/* EQ animation */
+.eq-container {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 20px;
+    margin-top: 15px;
+}
+
+.eq-bar {
+    width: 3px;
+    height: 3px;
+    background-color: var(--primary-pink);
+    border-radius: 3px;
+    animation: bounceEq 1s ease-in-out infinite alternate;
+    animation-play-state: paused;
+}
+
+.bento-music.playing .eq-bar {
+    animation-play-state: running;
+}
+
+.eq-bar:nth-child(2) { animation-delay: 0.15s; height: 5px; }
+.eq-bar:nth-child(3) { animation-delay: 0.3s; height: 2px; }
+.eq-bar:nth-child(4) { animation-delay: 0.05s; height: 4px; }
+.eq-bar:nth-child(5) { animation-delay: 0.2s; height: 6px; }
+
+@keyframes bounceEq {
+    0% { height: 3px; }
+    100% { height: 18px; }
+}
+
+/* Wishes Card */
+.bento-wishes {
+    grid-column: span 1;
+    grid-row: span 2;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-header-title {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.wishes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
     justify-content: center;
 }
 
-.text-box-left .box-text {
+.wish-item {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    padding: 16px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.wish-item:hover {
+    transform: translateX(10px) scale(1.02);
+    background: white;
+    border-color: var(--primary-pink);
+    box-shadow: 0 10px 25px rgba(224, 83, 117, 0.1);
+}
+
+.avatar-initial {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #FFE3E8 0%, #FFD7E0 100%);
+    color: var(--primary-pink);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    border: 2px solid white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.wish-brief {
+    flex: 1;
+}
+
+.wish-sender {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-main);
+    margin-bottom: 2px;
+}
+
+.wish-snippet {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+}
+
+.seal-icon {
+    color: var(--primary-pink);
+    opacity: 0.5;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.wish-item:hover .seal-icon {
+    opacity: 1;
+    transform: scale(1.2) rotate(10deg);
+}
+
+/* Polaroid Gallery Card */
+.bento-gallery {
+    grid-column: span 1;
+    grid-row: span 2;
+    display: flex;
+    flex-direction: column;
+}
+
+.polaroid-deck {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+    cursor: grab;
+}
+
+.polaroid-deck:active {
+    cursor: grabbing;
+}
+
+.polaroid-photo {
+    position: absolute;
+    width: 180px;
+    background: white;
+    padding: 10px 10px 24px 10px;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(74, 46, 53, 0.12);
+    border: 1px solid rgba(255, 117, 151, 0.1);
+    user-select: none;
+    transform-origin: bottom center;
+    will-change: transform, opacity;
+    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.25), box-shadow 0.6s ease, opacity 0.6s ease;
+}
+
+/* Frosted Tape Decoration on top of Polaroids */
+.polaroid-photo::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-3deg);
+    width: 55px;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(2px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    z-index: 10;
+}
+
+/* Polaroid interactive 3D fanning */
+.bento-gallery:hover .polaroid-photo:nth-child(1) {
+    transform: rotate(-15deg) translate(-28px, -5px) scale(1.05);
+}
+.bento-gallery:hover .polaroid-photo:nth-child(2) {
+    transform: rotate(15deg) translate(28px, 2px) scale(1.05);
+}
+.bento-gallery:hover .polaroid-photo:nth-child(3) {
+    transform: rotate(0deg) translate(0px, 15px) scale(1.1);
+    z-index: 5;
+    box-shadow: 0 18px 40px rgba(74, 46, 53, 0.2);
+}
+
+.polaroid-photo img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    pointer-events: none;
+}
+
+.polaroid-photo.zoomed {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) scale(2.2) rotate(0deg) !important;
+    z-index: 99999 !important;
+    box-shadow: 0 30px 90px rgba(74, 46, 53, 0.35) !important;
+    cursor: zoom-out;
+}
+
+/* Dim backdrop for zoomed photo */
+.photo-zoom-backdrop {
+    position: fixed;
+    top: 0;
     left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(74, 46, 53, 0.45);
+    backdrop-filter: blur(8px);
+    z-index: 99998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.photo-zoom-backdrop.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.polaroid-caption {
+    font-family: var(--font-hand);
+    font-size: 1.3rem;
+    text-align: center;
+    color: #2c1b1f;
+    line-height: 1;
+}
+
+/* Stacked cards rotation base */
+.polaroid-photo:nth-child(1) { transform: rotate(-6deg) translate(-5px, -5px); z-index: 3; }
+.polaroid-photo:nth-child(2) { transform: rotate(4deg) translate(5px, 2px); z-index: 2; }
+.polaroid-photo:nth-child(3) { transform: rotate(-2deg) translate(0px, 8px); z-index: 1; }
+
+.polaroid-photo.slide-out {
+    transform: translate(250px, -50px) rotate(45deg) scale(0.9) !important;
+    opacity: 0;
+    z-index: 10;
+}
+
+.gallery-tip {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: auto;
+}
+
+/* Cake Candle Card */
+.bento-cake {
+    grid-column: span 1;
+    grid-row: span 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.cake-container {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    margin: 15px auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+/* Beautiful CSS Cake */
+.cake-graphic {
+    position: relative;
+    width: 130px;
+    height: 100px;
+    background: #FFD3DB;
+    border-radius: 12px 12px 4px 4px;
+    box-shadow: inset 0 -8px 0 rgba(0,0,0,0.05);
+}
+
+.cake-graphic::before {
+    content: '';
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width: 100%;
+    height: 15px;
+    background: #E88398;
+}
+
+.cake-graphic::after {
+    content: '';
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background: #FFF;
+}
+
+.cream-drips {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    width: 140px;
+    height: 25px;
+    background: #FFF;
+    border-radius: 15px;
+}
+
+.cream-drips::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 120px;
+    height: 15px;
+    background: #FFF;
+    border-radius: 50%;
+    box-shadow: 15px 5px 0 #FFF, 45px 7px 0 #FFF, 75px 5px 0 #FFF, 105px 6px 0 #FFF;
+}
+
+.candles-row {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    z-index: 2;
+}
+
+.candle {
+    width: 8px;
+    height: 35px;
+    background: linear-gradient(to bottom, #7CDFFF 50%, #FFB6E9 50%);
+    border-radius: 3px 3px 0 0;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.candle:hover {
+    transform: scale(1.2);
+}
+
+.candle-wick {
+    width: 2px;
+    height: 6px;
+    background: #555;
+    position: absolute;
+    top: -6px;
+    left: 3px;
+}
+
+.flame {
+    width: 10px;
+    height: 18px;
+    background: radial-gradient(ellipse at bottom, #FFD000 30%, #FF6200 90%);
+    border-radius: 50% 50% 20% 20% / 60% 60% 40% 40%;
+    position: absolute;
+    top: -22px;
+    left: -1px;
+    animation: flickerFlame 0.8s ease infinite alternate;
+    box-shadow: 0 0 15px rgba(255, 166, 0, 0.6);
+    transform-origin: center bottom;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.candle.blown .flame {
+    opacity: 0;
+    transform: scale(0);
+    pointer-events: none;
+}
+
+@keyframes flickerFlame {
+    0% { transform: scale(1) rotate(-1deg); }
+    20% { transform: scale(0.9) rotate(2deg); }
+    40% { transform: scale(1.05) rotate(-2deg); }
+    60% { transform: scale(0.95) rotate(1deg); }
+    80% { transform: scale(1.1) rotate(0deg); }
+    100% { transform: scale(1) rotate(-1deg); }
+}
+
+/* Smoke Particle Animation */
+.smoke-particle {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: rgba(220, 220, 220, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 100;
+    animation: riseAndFade 1.5s ease-out forwards;
+    filter: blur(4px);
+}
+
+@keyframes riseAndFade {
+    0% { transform: translateY(0) scale(0.6); opacity: 0.8; }
+    50% { transform: translateY(-40px) translateX(15px) scale(1.2); opacity: 0.4; }
+    100% { transform: translateY(-80px) translateX(5px) scale(2); opacity: 0; }
+}
+
+.btn-wish {
+    background: white;
+    border: 1px solid var(--primary-pink);
+    color: var(--primary-pink);
+    padding: 12px 24px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-wish:hover {
+    background: var(--primary-pink);
+    color: white;
+    box-shadow: 0 8px 20px rgba(255, 117, 151, 0.3);
+    transform: scale(1.05);
+}
+
+/* Wish Jar Card */
+.bento-jar {
+    grid-column: span 3;
+    grid-row: span 2;
+    display: flex;
+    flex-direction: column;
+}
+
+.jar-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+    flex: 1;
+}
+
+.jar-svg {
+    width: 120px;
+    height: 140px;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.jar-svg svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 8px 20px rgba(0,0,0,0.08));
+    transition: transform 0.3s ease;
+}
+
+.jar-svg:hover svg {
+    transform: scale(1.05) rotate(-2deg);
+}
+
+.jar-wishes-board {
+    flex: 1;
+    height: 140px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px dashed rgba(224, 83, 117, 0.3);
+    border-radius: 16px;
+    padding: 16px;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-content: flex-start;
+}
+
+.empty-board-msg {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-align: center;
+    width: 100%;
+    margin-top: 40px;
+}
+
+.board-note {
+    background: #FFF;
+    border-left: 4px solid var(--primary-pink);
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    color: var(--text-main);
+    box-shadow: 0 4px 12px rgba(224, 83, 117, 0.06);
+    max-width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    animation: fadeInNote 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.board-note:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(224, 83, 117, 0.15);
+}
+
+@keyframes fadeInNote {
+    from { opacity: 0; transform: scale(0.8) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.jar-input-area {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.wish-textarea {
+    width: 100%;
+    height: 70px;
+    border: 1px solid rgba(255, 117, 151, 0.2);
+    border-radius: 12px;
+    padding: 12px;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    resize: none;
+    outline: none;
+    background: rgba(255, 255, 255, 0.6);
+    color: var(--text-main);
+    transition: all 0.3s ease;
+}
+
+.wish-textarea:focus {
+    background: white;
+    border-color: var(--primary-pink);
+    box-shadow: 0 0 0 4px rgba(255, 117, 151, 0.15);
+}
+
+.btn-send-wish {
+    background: var(--primary-pink);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.btn-send-wish:hover {
+    background: var(--primary-pink-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 117, 151, 0.3);
+}
+
+/* Glass Floating Wishes inside the Jar */
+.jar-folded-note {
+    transform-origin: center center;
+    animation: gentleFloat 4s ease-in-out infinite alternate;
+}
+
+@keyframes gentleFloat {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-4px) rotate(5deg); }
+}
+
+/* Flying Wish Letter Particle */
+.flying-wish-particle {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: var(--primary-pink);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 20px rgba(255, 117, 151, 0.4);
+    z-index: 9999;
+    pointer-events: none;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease;
+    will-change: transform, opacity;
+}
+
+/* Trail Sparkles */
+.trail-sparkle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #FFD700;
+    border-radius: 50%;
+    pointer-events: none;
+    box-shadow: 0 0 10px #FFD700;
+    z-index: 9998;
+    animation: sparkleFade 0.8s ease-out forwards;
+}
+
+@keyframes sparkleFade {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(0.2); opacity: 0; }
+}
+
+/* Modal Overlay for Wishes */
+.modal-overlay {
+    position: fixed;
     top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(74, 46, 53, 0.6);
+    backdrop-filter: blur(12px);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-.text-box-right .box-text {
-    right: 0;
-    top: 0;
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+.letter-paper {
+    background-color: #FAF6EE;
+    background-image: radial-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 0), radial-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 0);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+    border-radius: 16px;
+    padding: 50px 40px;
+    box-shadow: 0 35px 80px rgba(0,0,0,0.3);
+    max-width: 550px;
+    width: 90%;
+    position: relative;
+    transform: translateY(60px) scale(0.9) rotateX(10deg);
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(0,0,0,0.06);
+    transform-style: preserve-3d;
 }
 
-/* Tablet (768px - 1024px) */
+.modal-overlay.active .letter-paper {
+    transform: translateY(0) scale(1) rotateX(0deg);
+}
+
+.btn-close-modal {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1.5rem;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-close-modal:hover {
+    color: var(--primary-pink);
+    transform: scale(1.2) rotate(90deg);
+}
+
+.letter-content {
+    font-family: var(--font-hand);
+    font-size: 2rem;
+    color: #3D2D31;
+    line-height: 1.6;
+    text-align: left;
+}
+
+.letter-content p {
+    margin-bottom: 20px;
+}
+
+.letter-signature {
+    text-align: right;
+    margin-top: 40px;
+    font-size: 2.2rem;
+    color: var(--primary-pink-hover);
+}
+
+/* Toast Message */
+.toast-msg {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: #333;
+    color: white;
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+    z-index: 10001;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    opacity: 0;
+}
+
+.toast-msg.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+/* Responsive adjust */
 @media (max-width: 1024px) {
-    .text-box {
-        width: 200px;
-        height: 320px;
+    .bento-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
-
-    .box-icon {
-        font-size: 14px;
+    .bento-hero {
+        grid-column: span 2;
     }
-
-    .box-text {
-        font-size: 13px;
-        padding: 12px 15px;
+    .bento-music {
+        grid-column: span 1;
+    }
+    .bento-jar {
+        grid-column: span 2;
     }
 }
 
-/* Mobile (below 768px) */
 @media (max-width: 768px) {
-    .main {
-        display: flex;
+    .bento-grid {
+        grid-template-columns: 1fr;
+    }
+    .bento-hero {
+        grid-column: span 1;
+        grid-row: span 1;
         flex-direction: column;
-        padding-bottom: 50px;
+        padding: 30px;
     }
-
-    .container.pt-5 {
-        order: 1;
+    .hero-illustration {
+        width: 100%;
+        min-height: 200px;
+        order: -1;
     }
-
-    .text-box {
-        width: 80%;
-        height: 180px;
-        left: auto !important;
-        right: auto !important;
-        position: relative;
-        top: auto !important;
-        transform: none !important;
-        margin: 15px auto;
+    .hero-title {
+        font-size: 2.4rem;
     }
-
-    .text-box-left {
-        margin-top: 70%;
-        order: 2;
+    .bento-card {
+        grid-column: span 1 !important;
+        grid-row: span 1 !important;
+        transform: none !important; /* Disable 3D tilt on mobile */
     }
-
-    .text-box-right {
-        order: 3;
+    .jar-content {
+        flex-direction: column;
+        align-items: center;
     }
-
-    .box-icon {
-        font-size: 16px;
+    .jar-wishes-board {
+        width: 100%;
     }
-
-    .box-text {
-        font-size: 14px;
+    .jar-input-area {
+        width: 100% !important;
+    }
+    .letter-paper {
+        padding: 35px 25px;
+    }
+    .letter-content {
+        font-size: 1.5rem;
     }
 }
